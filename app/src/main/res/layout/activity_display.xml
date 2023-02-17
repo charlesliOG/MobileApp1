@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DisplayActivity"
+    android:padding="16dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="8dp"
+        android:text="First Name:"
+        android:id="@+id/tv_fn_hardcoded"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/tv_fn_hardcoded"
+        tools:text="Mickey"
+        android:id="@+id/tv_fn_data"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tv_fn_hardcoded"
+        android:layout_marginTop="8dp"
+        android:text="Middle Name:"
+        android:id="@+id/tv_mn_hardcoded"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/tv_fn_hardcoded"
+        android:layout_toRightOf="@id/tv_mn_hardcoded"
+        tools:text="Man"
+        android:id="@+id/tv_mn_data"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tv_mn_hardcoded"
+        android:layout_marginTop="8dp"
+        android:text="Last Name:"
+        android:id="@+id/tv_ln_hardcoded"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tv_ln_hardcoded"
+        android:layout_marginTop="8dp"
+        android:text="Login:"
+        android:id="@+id/tv_login"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/tv_mn_hardcoded"
+        android:layout_toRightOf="@id/tv_ln_hardcoded"
+        tools:text="Mouse"
+        android:id="@+id/tv_ln_data"
+        />
+
+</RelativeLayout>
