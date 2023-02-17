@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.drawToBitmap
 
 class DisplayActivity : AppCompatActivity() {
     var mTvFirstName: TextView? = null
@@ -13,6 +14,11 @@ class DisplayActivity : AppCompatActivity() {
     var mTvLastName: TextView? = null
     var mTvLogin: TextView? = null
     var mIvThumbnail: ImageView? = null
+
+    private var mFirstName: String? = null
+    private var mMiddleName: String? = null
+    private var mLastName: String? = null
+    private var mLogin: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display)
@@ -35,5 +41,30 @@ class DisplayActivity : AppCompatActivity() {
         mTvLogin!!.text = mTvFirstName!!.text.toString() + " " + mTvLastName!!.text.toString() +  " is logged in!"
 
         Toast.makeText(this@DisplayActivity, mTvFirstName!!.text.toString() + " " + mTvLastName!!.text.toString() +  " is logged in!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        mFirstName = mTvFirstName!!.text.toString()
+        mMiddleName = mTvMiddleName!!.text.toString()
+        mLastName = mTvLastName!!.text.toString()
+        mLogin = mTvLogin!!.text.toString()
+
+        outState.putString("FN_TEXT", mFirstName)
+        outState.putString("MN_TEXT", mMiddleName)
+        outState.putString("LN_TEXT", mLastName)
+        outState.putString("LO_TEXT", mLogin)
+
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        mTvFirstName!!.text = savedInstanceState.getString("FN_TEXT")
+        mTvMiddleName!!.text = savedInstanceState.getString("MN_TEXT")
+        mTvLastName!!.text = savedInstanceState.getString("LN_TEXT")
+        mTvLogin!!.text = savedInstanceState.getString("LO_TEXT")
+
     }
 }

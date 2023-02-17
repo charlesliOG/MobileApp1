@@ -3,13 +3,15 @@ package com.charlesli.app1
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -42,6 +44,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mButtonCamera!!.setOnClickListener(this)
 
         mDisplayIntent = Intent(this, DisplayActivity::class.java)
+
+        mTvFirstName = findViewById<View>(R.id.et_fname) as EditText
+        mTvMiddleName = findViewById<View>(R.id.et_mname) as EditText
+        mTvLastName = findViewById<View>(R.id.et_lname) as EditText
+
     }
 
     override fun onClick(view: View) {
@@ -110,5 +117,54 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        mFirstName = mTvFirstName!!.text.toString()
+        mMiddleName = mTvMiddleName!!.text.toString()
+        mLastName = mTvLastName!!.text.toString()
+
+        if(mIvPic != null)
+        {
+            val bmp = (mIvPic!!.getDrawable() as BitmapDrawable).bitmap
+            outState.putParcelable("bitmap", bmp)
+
+        }
+
+        outState.putString("FN_TEXT", mFirstName)
+        outState.putString("MN_TEXT", mMiddleName)
+        outState.putString("LN_TEXT", mLastName)
+
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+
+
+        if (Build.VERSION.SDK_INT >= 33) {
+
+            if(savedInstanceState.getParcelable("bitmap", Bitmap::class.java) != null)
+            {
+                val bmp = savedInstanceState.getParcelable("bitmap",Bitmap::class.java)
+                mIvPic = findViewById<View>(R.id.iv_pic) as ImageView
+                mIvPic!!.setImageBitmap(bmp)
+
+            }
+
+        }
+        else{
+            val bmp = savedInstanceState.getParcelable<Bitmap>("bitmap")
+
+        }
+
+
+        mTvFirstName!!.text = savedInstanceState.getString("FN_TEXT")
+        mTvMiddleName!!.text = savedInstanceState.getString("MN_TEXT")
+        mTvLastName!!.text = savedInstanceState.getString("LN_TEXT")
+
+
     }
 }
